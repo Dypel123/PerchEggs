@@ -1,0 +1,16 @@
+name: PerchEggs
+version: 1.0.0
+main: me.perch.Eggs
+api-version: 1.21
+author: KayaLambrex
+permissions:
+  percheggs.use:
+    description: Allows using the Perch Eggs
+    default: true
+  percheggs.admin:
+    description: Allows giving Perch Eggs
+    default: op
+commands:
+  percheggs:
+    description: Main command for PerchEggs
+    usage: /percheggs give <singleuse|multipleuse> [amount]

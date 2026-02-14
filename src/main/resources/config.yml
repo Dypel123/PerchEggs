@@ -1,0 +1,47 @@
+items:
+  empty-egg:
+    name: "&#FEC300Mob Egg &f(Uses: &#FFFF3A%uses%&f)"
+    lore:
+      - "&#FFFF3ARight Click &fa mob to catch it!"
+    material: BROWN_EGG
+
+  filled-egg:
+    name-format: "&#FEC300Mob Egg <reset>(&#FFFF3A<name>&f)"
+    header-format: "&fContains: &#FFFF3A<name>"
+    stat-format: "<white>%label%: %value%"
+    default-stat-color: "<#FFFF3A>"
+
+messages:
+  prefix: "&8» &f"
+  catch-success: "<green>You caught a %entity%!"
+  catch-fail-type: "<red>You cannot catch this entity."
+  catch-fail-inventory: "<red>Your inventory is full! Make space to catch this mob."
+  no-permission: "<red>You do not have permission to use this here."
+  give-success: "<green>Gave %amount% %type% egg(s) to %player%."
+  invalid-args: "<red>Usage: /percheggs give <singleuse|multipleuse> <uses>"
+
+sounds:
+  catch:
+    sound: ENTITY_EXPERIENCE_ORB_PICKUP
+    volume: 1.0
+    pitch: 1.5
+
+  spawn:
+    sound: ENTITY_CHICKEN_EGG
+    volume: 1.0
+    pitch: 1.0
+
+  throw-prevented:
+    sound: UI_BUTTON_CLICK
+    volume: 1.0
+    pitch: 1.0
+
+particles:
+  catch: VILLAGER_HAPPY
+  spawn: CLOUD
+
+blacklist:
+  - ENDER_DRAGON
+  - WITHER
+  - PLAYER
+  - WARDEN
