@@ -115,15 +115,19 @@ public class EggManager {
         EntitySnapshot snapshot = entity.createSnapshot();
         meta.setSpawnedEntity(snapshot);
 
+        String typeName = formatKey(entity.getType().name());
+        if (entity instanceof Ageable ageable && !ageable.isAdult()) {
+            typeName += " (Baby)";
+        }
+
         String simpleName;
         if (entity.customName() != null) {
             simpleName = PlainTextComponentSerializer.plainText().serialize(entity.customName());
         } else {
             simpleName = formatKey(entity.getType().name());
-        }
-
-        if (entity instanceof Ageable ageable && !ageable.isAdult()) {
-            simpleName += " (Baby)";
+            if (entity instanceof Ageable ageable && !ageable.isAdult()) {
+                simpleName += " (Baby)";
+            }
         }
 
         Component nameComponent = Component.text(simpleName);
@@ -147,7 +151,7 @@ public class EggManager {
         headerFormat = ColorUtil.convertLegacyToMiniMessage(headerFormat);
         headerFormat = headerFormat.replace("%name%", "<name>");
 
-        finalLore.add(MiniMessage.miniMessage().deserialize(headerFormat, Placeholder.component("name", nameComponent))
+        finalLore.add(MiniMessage.miniMessage().deserialize(headerFormat, Placeholder.component("name", Component.text(typeName)))
                 .decoration(TextDecoration.ITALIC, false));
 
         List<StatEntry> stats = new ArrayList<>();
