@@ -125,10 +125,9 @@ public class EggManager {
             simpleName = PlainTextComponentSerializer.plainText().serialize(entity.customName());
         } else {
             simpleName = formatKey(entity.getType().name());
-        }
-
-        if (entity instanceof Ageable ageable && !ageable.isAdult()) {
-            simpleName += " (Baby)";
+            if (entity instanceof Ageable ageable && !ageable.isAdult()) {
+                simpleName += " (Baby)";
+            }
         }
 
         Component nameComponent = Component.text(simpleName);
