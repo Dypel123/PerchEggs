@@ -105,6 +105,7 @@ public class EggListener implements Listener {
         }
     }
 
+
     @EventHandler(priority = EventPriority.HIGH)
     public void onInteract(PlayerInteractEvent event) {
         if (event.getHand() != EquipmentSlot.HAND) return;
@@ -117,15 +118,11 @@ public class EggListener implements Listener {
 
         if (event.getAction() != Action.RIGHT_CLICK_AIR && event.getAction() != Action.RIGHT_CLICK_BLOCK) return;
 
-        if (event.getAction() == Action.RIGHT_CLICK_BLOCK && event.getClickedBlock() != null) {
-            String blockName = event.getClickedBlock().getType().name();
-            if (blockName.contains("SIGN")) {
-                return;
-            }
-        }
 
-        if (event.isCancelled() || event.useItemInHand() == org.bukkit.event.Event.Result.DENY) {
-            return;
+        if (event.getAction() == Action.RIGHT_CLICK_BLOCK && event.getClickedBlock() != null) {
+            Block block = event.getClickedBlock();
+
+            if (!player.isSneaking() && block.getType().isInteractable()) return;
         }
 
         ItemStack item = event.getItem();
@@ -523,11 +520,10 @@ public class EggListener implements Listener {
     }
 
     private void giveOrDrop(Player player, ItemStack item) {
-        java.util.Map<Integer, ItemStack> leftovers = player.getInventory().addItem(item);
-        if (!leftovers.isEmpty()) {
-            for (ItemStack leftover : leftovers.values()) {
-                player.getWorld().dropItem(player.getLocation(), leftover);
-            }
+        if (player.getInventory().firstEmpty() != -1) {
+            player.getInventory().addItem(item);
+        } else {
+            player.getWorld().dropItem(player.getLocation(), item);
         }
     }
 }
