@@ -118,9 +118,12 @@ public class EggListener implements Listener {
         if (event.getAction() != Action.RIGHT_CLICK_AIR && event.getAction() != Action.RIGHT_CLICK_BLOCK) return;
 
         if (event.getAction() == Action.RIGHT_CLICK_BLOCK && event.getClickedBlock() != null) {
-            String blockName = event.getClickedBlock().getType().name();
-            if (blockName.contains("SIGN")) {
-                return;
+            Block block = event.getClickedBlock();
+
+            if (!player.isSneaking()) {
+                if (block.getType().isInteractable()) return;
+
+                if (event.useInteractedBlock() != org.bukkit.event.Event.Result.DENY) return;
             }
         }
 
