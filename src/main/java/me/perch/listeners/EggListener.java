@@ -252,6 +252,11 @@ public class EggListener implements Listener {
         EggManager em = plugin.getEggManager();
         ConfigManager cm = plugin.getConfigManager();
 
+        if (em.isPerchEgg(handItem) && handItem.getType() != cm.getEggMaterial()) {
+            event.setCancelled(true);
+            return;
+        }
+
         if (!em.isPerchEgg(handItem)) return;
         if (handItem.getType() != cm.getEggMaterial()) return;
 
